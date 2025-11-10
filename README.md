@@ -64,6 +64,7 @@ streamdeck list # confirm linked
 ls ~/Library/Application\ Support/com.elgato.StreamDeck/Plugins
 
 npm run restart # (re)start plugin
+npm run validate # check if any issues w/ streamdeck validate CLI
 
 npm run watch # auto build on changes
 
