@@ -64,6 +64,8 @@ streamdeck list # confirm linked
 ls ~/Library/Application\ Support/com.elgato.StreamDeck/Plugins
 
 # * restart sandboxed plugin process
+streamdeck dev # make sure in dev mode, I think this is on by default? I am unsure though, logs will show cannot restart a plugin if not in dev mode
+streamdeck dev --disable # disable dev mode
 npm run restart # (re)start plugin
 # https://github.com/elgatosf/cli/blob/main/src/commands/restart.ts (source for restart command), uses:
 open streamdeck://plugins/restart/com.wes.kmtrigger # alternative

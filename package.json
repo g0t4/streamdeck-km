@@ -11,7 +11,8 @@
         "restart": "streamdeck restart com.wes.kmtrigger",
         "stop": "streamdeck stop com.wes.kmtrigger",
         "validate": "streamdeck validate ./com.wes.kmtrigger.sdPlugin",
-        "package": "node scripts/package.js",
+        "pack": "streamdeck pack com.wes.kmtrigger.sdPlugin",
+        "pack-dryrun": "streamdeck pack --dry-run com.wes.kmtrigger.sdPlugin",
         "logs-sdjson-kmtrigger": "tail -F ~/Library/Logs/ElgatoStreamDeck/StreamDeck.json | grep kmtrigger --line-buffered | jq --compact-output",
         "logs-sdjson-all": "tail -F ~/Library/Logs/ElgatoStreamDeck/StreamDeck.json | grep kmtrigger --line-buffered | jq --compact-output"
     },
