@@ -9,7 +9,29 @@ import {
     SendToPluginEvent,
     TitleParametersDidChangeEvent,
     Target,
+    streamDeck,
 } from "@elgato/streamdeck";
+
+const colors = [{
+    label: '__MSG_primary__',
+    children: [{
+        label: '__MSG_red__',
+        value: '#ff0000'
+    }, {
+        label: '__MSG_green__',
+        value: '#00ff00'
+    }, {
+        label: '__MSG_blue__',
+        value: '#0000ff'
+    }]
+}, {
+    label: '__MSG_black__',
+    value: '#000000'
+}, {
+    label: '__MSG_white__',
+    value: '#ffffff'
+}];
+
 
 @action({ UUID: "com.wes.kmtrigger.macro" })
 export class TriggerMacro extends SingletonAction<CounterSettings> {
@@ -55,6 +77,11 @@ export class TriggerMacro extends SingletonAction<CounterSettings> {
         console.log("onSendToPlugin", ev);
         if (ev.payload?.event === 'list-macros') {
             console.log("LIST-MACROS");
+            streamDeck.ui.current?.sendToPropertyInspector({
+                event: ev.payload.event,
+                items: colors
+            })
+            // streamDeck.system.openUrl("https://google.com");
         }
     }
 
