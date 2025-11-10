@@ -1,6 +1,6 @@
 import streamDeck, { LogLevel } from "@elgato/streamdeck";
 
-import { TriggerMacro } from "./actions/increment-counter";
+import { TriggerMacro } from "./actions/trigger-macro";
 
 streamDeck.logger.setLevel(LogLevel.TRACE);
 

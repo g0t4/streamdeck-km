@@ -21,7 +21,7 @@
     "Author": "g0t4",
     "CodePath": "bin/plugin.js",
     "CodePathMac": "bin/plugin.js",
-    "PropertyInspectorPath": "pi.html",
+    "PropertyInspectorPath": "ui/trigger-macro.html",
     "Description": "Execute Keyboard Maestro macros from Stream Deck",
     "Name": "kmtrigger",
     "Icon": "action",

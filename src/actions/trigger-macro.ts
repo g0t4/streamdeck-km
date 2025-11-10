@@ -7,11 +7,11 @@ export class TriggerMacro extends SingletonAction<CounterSettings> {
     }
 
     override async onKeyDown(ev: KeyDownEvent<CounterSettings>): Promise<void> {
-        console.log("FUCK2");
+        console.log("triggering macro...");
         // Update the count from the settings.
         const { settings } = ev.payload;
-        settings.incrementBy ??= 1;
-        settings.count = (settings.count ?? 0) + settings.incrementBy;
+        settings.fuckBy ??= 1;
+        settings.count = (settings.count ?? 0) + settings.fuckBy;
 
         // Update the current count in the action's settings, and change the title.
         await ev.action.setSettings(settings);
@@ -24,5 +24,5 @@ export class TriggerMacro extends SingletonAction<CounterSettings> {
  */
 type CounterSettings = {
     count?: number;
-    incrementBy?: number;
+    fuckBy?: number;
 };
