@@ -6,7 +6,7 @@
             "States": [
                 {
                     "Image": "action",
-                    "FontSize": "18",
+                    "FontSize": 18,
                     "FontStyle": "Bold",
                     "TitleAlignment": "middle",
                     "TitleColor": "#ffffff"
