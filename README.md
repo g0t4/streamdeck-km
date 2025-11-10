@@ -79,9 +79,17 @@ npm run watch # auto build on changes
 ### Logs
 
 ```fish
+
+# Ensure plugin is running (node process)
+pgrep -ilfa "com.wes.kmtrigger"
+# IF it's not running, then check logs (next)
+# BTW, CLI args has devtools port to inspect 
+# TODO confirm # IIAC restart command restarts this process
+
 # TODO check how rollover works on log files, is the StreamDeck.json always latest logs? or the .0/.1/.2 etc?
 npm run logs-sdjson-kmtrigger
 # see package.json for more log commands
+# should give you exit code / reason if it failed on restart
 
 ```
 
