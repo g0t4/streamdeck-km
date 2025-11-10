@@ -13,7 +13,7 @@
         }
       ],
       "Tooltip": "Execute a Keyboard Maestro Macro",
-      "UUID": "com.streamdeck.kmtrigger.action"
+      "UUID": "com.wes.kmtrigger.action"
     }
   ],
   "SDKVersion": 2,

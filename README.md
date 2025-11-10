@@ -22,7 +22,7 @@ A Stream Deck plugin to trigger Keyboard Maestro macros with a button press.
 ### Option 1: Install from file
 
 1. Build the plugin (see Development section below)
-2. Double-click `com.streamdeck.kmtrigger.sdPlugin` to install
+2. Double-click `com.wes.kmtrigger.sdPlugin` to install
 
 ### Option 2: Development installation
 
@@ -50,7 +50,7 @@ A Stream Deck plugin to trigger Keyboard Maestro macros with a button press.
 ├── src/
 │   ├── plugin.ts          # Main plugin code
 │   └── km-helper.ts       # Keyboard Maestro integration
-├── com.streamdeck.kmtrigger.sdPlugin/
+├── com.wes.kmtrigger.sdPlugin/
 │   ├── manifest.json      # Plugin manifest
 │   ├── pi.html           # Property Inspector UI
 │   ├── bin/              # Compiled JavaScript

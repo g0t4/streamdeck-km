@@ -2,11 +2,11 @@
   "name": "streamdeck-km-trigger",
   "version": "1.0.0",
   "description": "Stream Deck plugin to trigger Keyboard Maestro macros",
-  "main": "com.streamdeck.kmtrigger.sdPlugin/bin/plugin.js",
+  "main": "com.wes.kmtrigger.sdPlugin/bin/plugin.js",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "devlink": "ln -sf \"$(pwd)/com.streamdeck.kmtrigger.sdPlugin\" ~/Library/Application\\ Support/com.elgato.StreamDeck/Plugins/",
+    "devlink": "ln -sf \"$(pwd)/com.wes.kmtrigger.sdPlugin\" ~/Library/Application\\ Support/com.elgato.StreamDeck/Plugins/",
     "package": "node scripts/package.js"
   },
   "keywords": ["streamdeck", "keyboard-maestro", "elgato"],
