@@ -6,8 +6,11 @@
     "scripts": {
         "build": "tsc",
         "watch": "tsc --watch",
-        "link": "streamdeck link com.wes.kmtrigger.sdPlugin",
-
+        "link": "streamdeck link ./com.wes.kmtrigger.sdPlugin",
+        "unlink": "streamdeck unlink com.wes.kmtrigger",
+        "restart": "streamdeck restart com.wes.kmtrigger",
+        "stop": "streamdeck stop com.wes.kmtrigger",
+        "validate": "streamdeck validate ./com.wes.kmtrigger.sdPlugin",
         "package": "node scripts/package.js"
     },
     "keywords": [ "streamdeck", "keyboard-maestro", "elgato" ],
