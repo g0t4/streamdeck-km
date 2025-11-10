@@ -29,10 +29,7 @@ A Stream Deck plugin to trigger Keyboard Maestro macros with a button press.
 1. Clone this repository
 2. Install dependencies: `npm install`
 3. Build the plugin: `npm run build`
-4. Create a symlink to the plugin folder in Stream Deck's plugin directory:
-   ```bash
-   ln -s "$(pwd)/com.streamdeck.kmtrigger.sdPlugin" ~/Library/Application\ Support/com.elgato.StreamDeck/Plugins/
-   ```
+4. Create a symlink to the plugin folder: `npm run devlink`
 5. Restart Stream Deck software
 
 ## Usage
@@ -70,6 +67,9 @@ npm install
 
 # Build TypeScript
 npm run build
+
+# Link plugin to Stream Deck (for development)
+npm run devlink
 
 # Watch mode (auto-rebuild on changes)
 npm run watch
