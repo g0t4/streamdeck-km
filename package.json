@@ -14,6 +14,7 @@
         "validate": "streamdeck validate ./com.wes.kmtrigger.sdPlugin",
         "pack": "streamdeck pack com.wes.kmtrigger.sdPlugin",
         "pack-dryrun": "streamdeck pack --dry-run com.wes.kmtrigger.sdPlugin",
+        "logs-plugin": "tail -F ./com.wes.kmtrigger.sdPlugin/logs/com.wes.kmtrigger.0.log | bat -l log",
         "logs-sdjson-kmtrigger": "tail -F ~/Library/Logs/ElgatoStreamDeck/StreamDeck.json | grep kmtrigger --line-buffered | jq --compact-output",
         "logs-sdjson-all": "tail -F ~/Library/Logs/ElgatoStreamDeck/StreamDeck.json | grep kmtrigger --line-buffered | jq --compact-output",
         "devtools": "open -a 'Brave Browser Beta' \"devtools://devtools/bundled/inspector.html?ws=127.0.0.1:12345/$(curl -s http://127.0.0.1:12345/json/list | jq -r '.[0].id')\""
