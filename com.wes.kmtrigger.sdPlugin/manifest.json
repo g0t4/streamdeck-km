@@ -2,7 +2,7 @@
     "Actions": [
         {
             "Icon": "action",
-            "Name": "Trigger KM Macro",
+            "Name": "kmtrigger Macro",
             "States": [
                 {
                     "Image": "action",
@@ -12,24 +12,24 @@
                     "TitleColor": "#ffffff"
                 }
             ],
-            "Tooltip": "Execute a Keyboard Maestro Macro",
+            "Tooltip": "Trigger a Keyboard Maestro Macro (kmtrigger)",
             "UUID": "com.wes.kmtrigger.action"
         }
     ],
     "SDKVersion": 2,
-    "Author": "wesdemos",
+    "Author": "g0t4",
     "CodePath": "bin/plugin.js",
     "CodePathMac": "bin/plugin.js",
     "PropertyInspectorPath": "pi.html",
     "Description": "Execute Keyboard Maestro macros from Stream Deck",
-    "Name": "KM Trigger",
+    "Name": "kmtrigger",
     "Icon": "action",
     "URL": "https://github.com/g0t4/streamdeck-km",
-    "Version": "1.0.0.1",
+    "Version": "1.0.0.2",
     "OS": [
         {
             "Platform": "mac",
-            "MinimumVersion": "10.11"
+            "MinimumVersion": "15"
         }
     ],
     "Software": {
