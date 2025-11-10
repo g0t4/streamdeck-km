@@ -122,7 +122,7 @@
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
 
 # Thumbnails
 ._*
@@ -209,3 +209,10 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,windows,archives,images,video,vim
 
+# Node.js
+node_modules/
+*.log
+
+# Stream Deck Plugin - Allow required assets
+!com.streamdeck.kmtrigger.sdPlugin/*.png
+!com.streamdeck.kmtrigger.sdPlugin/*.svg
