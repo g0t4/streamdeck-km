@@ -25,7 +25,7 @@
     "Name": "KM Trigger",
     "Icon": "action",
     "URL": "https://github.com/g0t4/streamdeck-km",
-    "Version": "1.0.0",
+    "Version": "1.0.0.1",
     "OS": [
         {
             "Platform": "mac",
