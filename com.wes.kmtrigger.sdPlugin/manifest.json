@@ -33,7 +33,7 @@
     }
   ],
   "Software": {
-    "MinimumVersion": "4.1"
+    "MinimumVersion": "7.0"
   },
   "Nodejs": {
     "Version": "20",
