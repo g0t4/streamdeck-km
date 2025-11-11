@@ -72,13 +72,13 @@ export class KeyboardMaestroHelper {
         return groups;
     }
 
-    static async executeMacro(uid: string, param?: string): Promise<void> {
+    static async executeMacro(macro_uuid: string, trigger_value?: string): Promise<void> {
         try {
-            let script = `tell application "Keyboard Maestro Engine" to do script "${uid}"`;
+            // * docs: https://wiki.keyboardmaestro.com/AppleScript
+            let script = `tell application "Keyboard Maestro Engine" to do script "${macro_uuid}"`;
 
-            if (param) {
-                // Escape quotes in parameter
-                const escapedParam = param.replace(/"/g, '\\"');
+            if (trigger_value) {
+                const escapedParam = trigger_value.replace(/"/g, '\\"');
                 script += ` with parameter "${escapedParam}"`;
             }
 
@@ -89,7 +89,8 @@ export class KeyboardMaestroHelper {
                 throw new Error(stderr);
             }
 
-            console.log('Macro executed successfully:', uid);
+            console.log('Macro executed successfully:', macro_uuid);
+
         } catch (error: any) {
             console.error('Failed to execute macro:', error.message);
             throw error;
