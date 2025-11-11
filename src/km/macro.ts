@@ -38,26 +38,30 @@ export class TriggerMacro extends SingletonAction<TriggerMacroSettings> {
         await KeyboardMaestroHelper.executeMacro(settings.macro_uuid, settings.trigger_value);
     }
 
+    async sendMacrosList(ev: SendToPluginEvent<MySendToPlugin, TriggerMacroSettings>) {
+        const macroGroups = await KeyboardMaestroHelper.getMacroList();
+
+        // docs on format of options: https://sdpi-components.dev/docs/components/select
+        const macrosList = macroGroups.map(g => {
+            return {
+                label: g.name,
+                children: g.macros.map(m => ({
+                    label: m.name,
+                    value: m.uid
+                }))
+            };
+        });
+
+        // FYI streamDeck.ui.sendToPropertyInspector in v2.0.0 (ui.current is removed in 2, or deprecated)
+        streamDeck.ui.current?.sendToPropertyInspector({
+            event: ev.payload.event,
+            items: macrosList
+        })
+    }
+
     override async onSendToPlugin(ev: SendToPluginEvent<MySendToPlugin, TriggerMacroSettings>): Promise<void> {
         if (ev.payload?.event === 'list-macros') {
-            const macroGroups = await KeyboardMaestroHelper.getMacroList();
-
-            // docs on format of options: https://sdpi-components.dev/docs/components/select
-            const macrosList = macroGroups.map(g => {
-                return {
-                    label: g.name,
-                    children: g.macros.map(m => ({
-                        label: m.name,
-                        value: m.uid
-                    }))
-                };
-            });
-
-            // FYI streamDeck.ui.sendToPropertyInspector in v2.0.0 (ui.current is removed in 2, or deprecated)
-            streamDeck.ui.current?.sendToPropertyInspector({
-                event: ev.payload.event,
-                items: macrosList
-            })
+            this.sendMacrosList(ev);
         }
     }
 }
