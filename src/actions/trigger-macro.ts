@@ -12,31 +12,11 @@ import {
     streamDeck,
 } from "@elgato/streamdeck";
 import { KeyboardMaestroHelper } from './km';
-const colors = [{
-    label: '__MSG_primary__',
-    children: [{
-        label: '__MSG_red__',
-        value: '#ff0000'
-    }, {
-        label: '__MSG_green__',
-        value: '#00ff00'
-    }, {
-        label: '__MSG_blue__',
-        value: '#0000ff'
-    }]
-}, {
-    label: '__MSG_black__',
-    value: '#000000'
-}, {
-    label: '__MSG_white__',
-    value: '#ffffff'
-}];
 
 
 @action({ UUID: "com.wes.kmtrigger.macro" })
 export class TriggerMacro extends SingletonAction<CounterSettings> {
     override async onWillAppear(ev: WillAppearEvent<CounterSettings>): Promise<void> {
-        const macros = await KeyboardMaestroHelper.getMacroList();
         return ev.action.setTitle(`${ev.payload.settings.count ?? 0}`);
     }
 
@@ -74,23 +54,48 @@ export class TriggerMacro extends SingletonAction<CounterSettings> {
         await ev.action.setTitle(`${settings.count}`);
     }
 
-    override onSendToPlugin(ev: SendToPluginEvent<MySendToPlugin, CounterSettings>): Promise<void> | void {
-        console.log("onSendToPlugin", ev);
+    override async onSendToPlugin(ev: SendToPluginEvent<MySendToPlugin, CounterSettings>): Promise<void> | void {
         if (ev.payload?.event === 'list-macros') {
-            console.log("LIST-MACROS");
+            const macroGroups = await KeyboardMaestroHelper.getMacroList();
+
+            // const colors = [{
+            //     label: '__MSG_primary__',
+            //     children: [{
+            //         label: '__MSG_red__',
+            //         value: '#ff0000'
+            //     }, {
+            //         label: '__MSG_green__',
+            //         value: '#00ff00'
+            //     }, {
+            //         label: '__MSG_blue__',
+            //         value: '#0000ff'
+            //     }]
+            // }, {
+            //     label: '__MSG_black__',
+            //     value: '#000000'
+            // }, {
+            //     label: '__MSG_white__',
+            //     value: '#ffffff'
+            // }];
+
+            const options = macroGroups.map(g => {
+                return {
+                    label: g.name,
+                    children: g.macros.map(m => ({
+                        label: m.name,
+                        value: m.uid
+                    }))
+                };
+            });
+
 
             // FYI streamDeck.ui.sendToPropertyInspector in v2.0.0 (ui.current is removed in 2, or deprecated)
             streamDeck.ui.current?.sendToPropertyInspector({
                 event: ev.payload.event,
-                items: colors
+                items: options
             })
-            // streamDeck.system.openUrl("https://google.com");
         }
     }
-
-    // override onTitleParametersDidChange(ev: TitleParametersDidChangeEvent<CounterSettings>): Promise<void> | void {
-    //     console.log("Title parameters changed:", ev);
-    // }
 }
 
 type MySendToPlugin = {
