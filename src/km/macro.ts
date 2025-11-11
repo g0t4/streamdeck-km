@@ -3,7 +3,6 @@ import {
     KeyDownEvent,
     SingletonAction,
     WillAppearEvent,
-    Logger,
     Action,
     JsonValue,
     SendToPluginEvent,
@@ -25,13 +24,12 @@ export class TriggerMacro extends SingletonAction<TriggerMacroSettings> {
     // }
 
     override async onKeyDown(ev: KeyDownEvent<TriggerMacroSettings>): Promise<void> {
-        console.log("triggering macro...", ev);
         const { settings } = ev.payload;
         // FYI can store state, IIAC across restarts too? 
         // settings.count = (settings.count ?? 0) + settings.increment
 
         if (!settings.macro_uuid) {
-            console.log("No macro UUID set, aborting.");
+            streamDeck.logger.error("No macro UUID set, aborting.");
             return;
         }
 

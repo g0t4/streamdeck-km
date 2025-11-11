@@ -1,3 +1,4 @@
+import { streamDeck, LogLevel } from "@elgato/streamdeck";
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import plist from 'plist'
@@ -28,7 +29,7 @@ export class KeyboardMaestroHelper {
             const { stdout } = await execAsync(`osascript -e '${script.replace(/'/g, "'\\''")}'`);
             return this.parseMacroGroupsXml(stdout);
         } catch (error: any) {
-            console.error('Fallback also failed:', error.message);
+            streamDeck.logger.error('Fallback also failed:', error.message);
             return [];
         }
     }
@@ -38,12 +39,12 @@ export class KeyboardMaestroHelper {
         try {
             parsedList = plist.parse(output);
         } catch (e) {
-            console.error('Failed to parse plist:', e);
+            streamDeck.logger.error('Failed to parse plist:', e);
             return [];
         }
 
         if (!Array.isArray(parsedList)) {
-            console.error('Unexpected plist structure, expected an array of groups');
+            streamDeck.logger.error('Unexpected plist structure, expected an array of groups');
             return [];
         }
 
@@ -68,7 +69,9 @@ export class KeyboardMaestroHelper {
             });
         }
 
-        console.log(`Parsed ${groups.length} groups, total macros: ${groups.reduce((c, g) => c + g.macros.length, 0)}`);
+        if (streamDeck.logger.level >= LogLevel.TRACE) {
+            streamDeck.logger.trace(`Parsed ${groups.length} groups, total macros: ${groups.reduce((c, g) => c + g.macros.length, 0)}`);
+        }
         return groups;
     }
 
@@ -86,16 +89,13 @@ export class KeyboardMaestroHelper {
             }
 
             const { stdout, stderr } = await execAsync(`osascript -e '${script}'`);
-
             if (stderr) {
-                console.error('Error executing macro:', stderr);
+                streamDeck.logger.error('Error executing macro:', stderr);
                 throw new Error(stderr);
             }
 
-            console.log('Macro executed successfully:', macro_uuid);
-
         } catch (error: any) {
-            console.error('Failed to execute macro:', error.message);
+            streamDeck.logger.error('Failed to execute macro:', error.message);
             throw error;
         }
     }

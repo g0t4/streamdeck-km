@@ -7,7 +7,7 @@ import http from "node:http";
 
 const log = (...m: any) => {
     fs.appendFileSync("/tmp/webby.log", m + "\n");
-    console.log(m) // backup
+    streamDeck.logger.trace(m) // backup
 }
 
 process.on("uncaughtException", e =>
@@ -58,7 +58,7 @@ export function startExternalServer() {
                 // }
             } catch (err) {
                 log("message handling failure", err);
-                console.error("message handling failure", err);
+                streamDeck.logger.error("message handling failure", err);
             }
         });
     })
@@ -66,7 +66,7 @@ export function startExternalServer() {
     wss.on("close", () => log("WSS close"));
     wss.on("error", err => {
         log("WSS error", err.message);
-        console.error("WSS error", err);
+        streamDeck.logger.error("WSS error", err);
     });
     wss.on("listening", () => {
         const address = httpServer.address();

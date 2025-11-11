@@ -21,8 +21,6 @@ streamDeck.system.onDidReceiveDeepLink((ev) => {
     //   is this a 7.0.3 bug? (current version and no updates)
     // NO remote sources (obviously)... not sure I'd want that!
 
-    console.log('deeplink', ev);
-
     // TODO! switch to using logger in SDeck
     //  any limitations?
     streamDeck.logger.info('deeper', ev); // shows up in com.wes.streamdeck.sdPlugin/logs/*
