@@ -30,10 +30,7 @@ export class TriggerMacro extends SingletonAction<TriggerMacroSettings> {
         // FYI can store state, IIAC across restarts too? 
         // settings.count = (settings.count ?? 0) + settings.increment
 
-        // TODO! settings.trigger_value
-        const uuid = settings.macro_uuid;
-        console.log('Macro UUID:', uuid);
-        await KeyboardMaestroHelper.executeMacro(uuid);
+        await KeyboardMaestroHelper.executeMacro(settings.macro_uuid, settings.trigger_value);
     }
 
     override async onSendToPlugin(ev: SendToPluginEvent<MySendToPlugin, TriggerMacroSettings>): Promise<void> {
