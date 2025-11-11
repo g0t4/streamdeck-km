@@ -1,5 +1,5 @@
 {
-    "name": "streamdeck-km-trigger",
+    "name": "streamdeck-wes-trigger",
     "version": "1.0.0",
     "description": "Stream Deck plugin to trigger Keyboard Maestro macros",
     "main": "com.wes.kmtrigger.sdPlugin/bin/plugin.js",

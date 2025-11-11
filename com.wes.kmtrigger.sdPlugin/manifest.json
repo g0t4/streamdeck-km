@@ -25,7 +25,7 @@
     "Description": "Execute Keyboard Maestro macros from Stream Deck",
     "Name": "kmtrigger",
     "Icon": "action",
-    "URL": "https://github.com/g0t4/streamdeck-km",
+    "URL": "https://github.com/g0t4/streamdeck-wes",
     "Version": "1.0.0.2",
     "OS": [
         {
