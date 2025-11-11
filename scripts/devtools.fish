@@ -8,10 +8,14 @@ set id $(curl -s $list_url | jq -r '.[0].id') # use ID to build own link
 set url $(curl -s $list_url | jq -r '.[0].devtoolsFrontendUrl')
 set url_prefix $(string replace --regex "$id\$" "" "$url") # strip ID from the end so link matches across restarts
 
+argparse show -- $argv
+# if --show passed, then it will be in _flag_show variable 
+# echo $_flag_show
+
 # alternative:
 # set url_legacy $(curl -s $list_url | jq -r '.[0].devtoolsFrontendUrlCompat')
 
-echo "
+set script "
 tell application \"Brave Browser Beta\"
 
     -- set url_prefix to \"devtools://devtools/bundled/inspector.html?ws=$host:$port\"
@@ -39,9 +43,16 @@ tell application \"Brave Browser Beta\"
     tell devtools_tab to set URL to \"$url\"
 
     -- switch back to prior app, very fast!
-    tell application \"System Events\"
-        set frontmost of prior_app to true
-    end tell
 end tell
+"
 
-" | osascript
+if not set -q _flag_show
+    # do not switch back to original app if --show passed
+    set script $script "
+tell application \"System Events\"
+    set frontmost of prior_app to true
+end tell
+"
+end
+
+echo $script | osascript

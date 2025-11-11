@@ -5,8 +5,9 @@
     "main": "com.wes.kmtrigger.sdPlugin/bin/plugin.js",
     "scripts": {
         "build": "rollup -c",
-        "watch": "rollup -c -w --watch.onEnd='npm run restart; sleep 1; npm run devtools'",
-        "devtools": "./scripts/devtools.fish",
+        "watch": "rollup -c -w --watch.onEnd='npm run restart; sleep 1; npm run devtools-background'",
+        "devtools": "./scripts/devtools.fish --show",
+        "devtools-background": "./scripts/devtools.fish",
         "devtools-pi": "open http://localhost:23654",
         "link": "streamdeck link ./com.wes.kmtrigger.sdPlugin",
         "unlink": "streamdeck unlink com.wes.kmtrigger",
