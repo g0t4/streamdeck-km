@@ -4,9 +4,12 @@ import path from "node:path";
 import { homedir } from "os";
 import { streamDeck } from "@elgato/streamdeck";
 
-const dir = path.resolve(path.join(homedir(), ".local/share/streamdeck-wes/"));
-
 const logger = streamDeck.logger.createScope("fs.chokeadick");
+
+// * PATHS
+const my_dir = path.join(homedir(), ".local/share/streamdeck-wes/");
+// I already save to this file whenever I change ask settings! let's just reuse it too!
+const ask_config = path.join(homedir(), ".local/share/nvim/ask-openai/config.json");
 
 function muhk_dir_pee(dir: string) {
     if (fs.existsSync(dir))
@@ -22,15 +25,15 @@ function muhk_dir_pee(dir: string) {
 
 export function chokit() {
 
-    muhk_dir_pee(dir);
+    const watchPaths = [my_dir, ask_config];
+    muhk_dir_pee(my_dir);
 
-    const watcher = chokidar.watch(dir, {
+    const watcher = chokidar.watch(watchPaths, {
         persistent: true,
         ignoreInitial: false, // this is initial sync (triggers for each existing file, unless disabled)
         useFsEvents: true,  // native macOS watcher
         awaitWriteFinish: { stabilityThreshold: 75, pollInterval: 10 },
         depth: 1,
-        cwd: dir, // paths are relative to this! thus use path.resolve(dir, relativePath)
     });
 
     watcher.on("ready", function () {
@@ -51,11 +54,9 @@ export function chokit() {
     // watcher.on("unlink", function (filePath: string, stats?: fs.Stats) {
     //     logger.info("unlink", filePath);
     // });
-
-    function readFile(relativePath: string, stats?: fs.Stats) {
+    function readFile(filePath: string, stats?: fs.Stats) {
         try {
-            const absolutePath = path.resolve(dir, relativePath)
-            const contents = fs.readFileSync(absolutePath, "utf8");
+            const contents = fs.readFileSync(filePath, "utf8");
             logger.trace("contents", contents);
             const parsed = JSON.parse(contents);
             logger.trace('parsed:', parsed);
