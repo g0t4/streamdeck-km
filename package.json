@@ -17,8 +17,7 @@
         "pack-dryrun": "streamdeck pack --dry-run com.wes.kmtrigger.sdPlugin",
         "logs-plugin": "tail -F ./com.wes.kmtrigger.sdPlugin/logs/com.wes.kmtrigger.0.log | bat -l log",
         "logs-sdjson-kmtrigger": "tail -F ~/Library/Logs/ElgatoStreamDeck/StreamDeck.json | grep kmtrigger --line-buffered | jq --compact-output",
-        "logs-sdjson-all": "tail -F ~/Library/Logs/ElgatoStreamDeck/StreamDeck.json | grep kmtrigger --line-buffered | jq --compact-output",
-        "devtools": "open -a 'Brave Browser Beta' \"devtools://devtools/bundled/inspector.html?ws=127.0.0.1:12345/$(curl -s http://127.0.0.1:12345/json/list | jq -r '.[0].id')\""
+        "logs-sdjson-all": "tail -F ~/Library/Logs/ElgatoStreamDeck/StreamDeck.json | grep kmtrigger --line-buffered | jq --compact-output"
     },
     "keywords": [
         "streamdeck",
@@ -35,11 +34,13 @@
         "@rollup/plugin-typescript": "^12.1.0",
         "@tsconfig/node20": "^20.1.2",
         "@types/node": "^20.0.0",
+        "@types/plist": "^3.0.5",
         "rollup": "^4.0.2",
         "tslib": "^2.6.2",
         "typescript": "^5.3.0"
     },
     "dependencies": {
-        "@elgato/streamdeck": "^1.0.0"
+        "@elgato/streamdeck": "^1.0.0",
+        "plist": "^3.1.0"
     }
 }
