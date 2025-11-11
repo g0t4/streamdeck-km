@@ -5,7 +5,7 @@
     "main": "com.wes.kmtrigger.sdPlugin/bin/plugin.js",
     "scripts": {
         "build": "rollup -c",
-        "watch": "rollup -c -w --watch.onEnd='npm run restart; npm run devtools'",
+        "watch": "rollup -c -w --watch.onEnd='npm run restart; sleep 1; npm run devtools'",
         "devtools": "open -a 'Brave Browser Beta' \"devtools://devtools/bundled/inspector.html?ws=127.0.0.1:12345/$(curl -s http://127.0.0.1:12345/json/list | jq -r '.[0].id')\"",
         "devtools-pi": "open http://localhost:23654",
         "link": "streamdeck link ./com.wes.kmtrigger.sdPlugin",
