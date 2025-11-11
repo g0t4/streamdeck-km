@@ -1,4 +1,4 @@
-import streamDeck, { LogLevel } from "@elgato/streamdeck";
+import streamDeck, { ApplicationDidLaunchEvent, ApplicationDidTerminateEvent, LogLevel } from "@elgato/streamdeck";
 import { TriggerMacro } from "./actions/trigger-macro";
 
 streamDeck.logger.setLevel(LogLevel.TRACE);
@@ -6,6 +6,14 @@ streamDeck.actions.registerAction(new TriggerMacro());
 streamDeck.connect();
 
 import { startExternalServer as startExternalWebSocketServer } from './webby';
+
+// must add app(s) to ApplicationsToMonitor in manifest.json
+streamDeck.system.onApplicationDidLaunch((ev: ApplicationDidLaunchEvent) => {
+    streamDeck.logger.info("launch", ev.application);
+});
+streamDeck.system.onApplicationDidTerminate((ev: ApplicationDidTerminateEvent) => {
+    streamDeck.logger.info("terminate", ev.application);
+});
 
 streamDeck.system.onDidReceiveDeepLink((ev) => {
     // PRN could use passive links over websocket long term, but the feature needs polished
