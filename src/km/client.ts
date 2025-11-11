@@ -74,7 +74,10 @@ export class KeyboardMaestroHelper {
 
     static async executeMacro(macro_uuid: string, trigger_value?: string): Promise<void> {
         try {
-            // * docs: https://wiki.keyboardmaestro.com/AppleScript
+            // * docs: 
+            // https://wiki.keyboardmaestro.com/manual/Scripting#Controlling_Keyboard_Maestro_Engine_via_Scripting
+            // get/set variables: https://wiki.keyboardmaestro.com/AppleScript
+
             let script = `tell application "Keyboard Maestro Engine" to do script "${macro_uuid}"`;
 
             if (trigger_value) {
