@@ -33,6 +33,11 @@ export function startExternalServer() {
     wss.on("connection", ws => {
         log("connected");
 
+        // FYI test with:
+        //   wscat -c ws://localhost:8102
+        //   make sure you get a prompt > else it's not a websocket server
+        //   1 is sufficient to parse as JSON
+
         ws.on("message", rawMessage => {
             const message = rawMessage.toString();
             log("rx msg: " + message)
