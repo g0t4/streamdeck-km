@@ -30,7 +30,7 @@ export function chokit() {
         useFsEvents: true,  // native macOS watcher
         awaitWriteFinish: { stabilityThreshold: 75, pollInterval: 10 },
         depth: 1,
-        cwd: dir, // paths are relative to this! thus use path.resolve(dir, relative_path)
+        cwd: dir, // paths are relative to this! thus use path.resolve(dir, relativePath)
     });
 
     watcher.on("ready", function () {
@@ -52,14 +52,14 @@ export function chokit() {
     //     logger.info("unlink", filePath);
     // });
 
-    function readFile(relative_path: string, stats?: fs.Stats) {
+    function readFile(relativePath: string, stats?: fs.Stats) {
         try {
-            const absolute_path = path.resolve(dir, relative_path)
-            const text = fs.readFileSync(absolute_path, "utf8");
-            logger.info("text", text);
-            const data = JSON.parse(text);
-            logger.info('Got data:', data);
-            // handleUpdate(path.basename(filePath), data);
+            const absolutePath = path.resolve(dir, relativePath)
+            const contents = fs.readFileSync(absolutePath, "utf8");
+            logger.trace("contents", contents);
+            const parsed = JSON.parse(contents);
+            logger.trace('parsed:', parsed);
+            // handleUpdate(path.basename(relativePath), data);
         } catch (err) {
 
             // avoid spamming errors if file mid-write (wait and see how often this happens):
