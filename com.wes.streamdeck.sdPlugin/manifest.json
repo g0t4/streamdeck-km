@@ -2,11 +2,11 @@
     "$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
     "Actions": [
         {
-            "Icon": "action",
+            "Icon": "icons/km.macro",
             "Name": "KM Macro",
             "States": [
                 {
-                    "Image": "action",
+                    "Image": "icons/km.macro",
                     "FontSize": 18,
                     "FontStyle": "Bold",
                     "TitleAlignment": "middle",
@@ -23,8 +23,10 @@
     "CodePathMac": "bin/plugin.js",
     "PropertyInspectorPath": "ui/trigger-macro.html",
     "Description": "monorepo of streamdeck mods!",
-    "Name": "Wes StreamDeck Mods",
-    "Icon": "action",
+    "Category": "Wes Mods",
+    "CategoryIcon": "icons/category",
+    "Name": "Wes Mods",
+    "Icon": "icons/category",
     "URL": "https://github.com/g0t4/streamdeck-wes",
     "Version": "1.0.0.2",
     "OS": [
