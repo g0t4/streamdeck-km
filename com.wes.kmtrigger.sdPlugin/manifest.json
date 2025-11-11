@@ -41,10 +41,5 @@
         "Debug": "--inspect=127.0.0.1:12345"
     },
     "UUID": "com.wes.kmtrigger",
-    "ApplicationsToMonitor": {
-        "mac": [
-            "com.brave.Browser.beta"
-        ]
-    }
 
 }
