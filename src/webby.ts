@@ -6,7 +6,8 @@ import fs from "node:fs";
 import http from "node:http";
 
 const log = (...m: any) => {
-    fs.appendFileSync("/tmp/webby.log", m + "\n");
+    // fs.appendFileSync("/tmp/webby.log", m + "\n");
+    // "logs-webby": "tail -F /tmp/webby.log",
     streamDeck.logger.trace(m) // backup
 }
 
