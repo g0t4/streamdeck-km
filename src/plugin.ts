@@ -8,9 +8,12 @@ streamDeck.connect();
 import { startExternalServer as startExternalWebSocketServer } from './webby';
 
 streamDeck.system.onDidReceiveDeepLink((ev) => {
-    // TODO! use passive links to send messages instead of using a websocket server?
-    // sounds good to me! if it works ok and doesn't open the streamdeck app
-    // not clunky slow too, right?
+    // PRN could use passive links over websocket long term, but the feature needs polished
+    // limited to ~2k of "data"
+    // FYI right now, even if passive link, if streamdeck app is open it switches to frontmost
+    //   and if streamdeck is closed, the frontmost app still loses focus (i.e. iTerm/Brave)
+    //   is this a 7.0.3 bug? (current version and no updates)
+    // NO remote sources (obviously)... not sure I'd want that!
 
     console.log('deeplink', ev);
 
