@@ -37,26 +37,7 @@ export class TriggerMacro extends SingletonAction<TriggerMacroSettings> {
         if (ev.payload?.event === 'list-macros') {
             const macroGroups = await KeyboardMaestroHelper.getMacroList();
 
-            // const colors = [{
-            //     label: '__MSG_primary__',
-            //     children: [{
-            //         label: '__MSG_red__',
-            //         value: '#ff0000'
-            //     }, {
-            //         label: '__MSG_green__',
-            //         value: '#00ff00'
-            //     }, {
-            //         label: '__MSG_blue__',
-            //         value: '#0000ff'
-            //     }]
-            // }, {
-            //     label: '__MSG_black__',
-            //     value: '#000000'
-            // }, {
-            //     label: '__MSG_white__',
-            //     value: '#ffffff'
-            // }];
-
+            // docs on format of options: https://sdpi-components.dev/docs/components/select
             const options = macroGroups.map(g => {
                 return {
                     label: g.name,
@@ -66,7 +47,6 @@ export class TriggerMacro extends SingletonAction<TriggerMacroSettings> {
                     }))
                 };
             });
-
 
             // FYI streamDeck.ui.sendToPropertyInspector in v2.0.0 (ui.current is removed in 2, or deprecated)
             streamDeck.ui.current?.sendToPropertyInspector({
