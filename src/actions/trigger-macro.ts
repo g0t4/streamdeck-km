@@ -11,7 +11,7 @@ import {
     Target,
     streamDeck,
 } from "@elgato/streamdeck";
-
+import { KeyboardMaestroHelper } from './km';
 const colors = [{
     label: '__MSG_primary__',
     children: [{
@@ -35,12 +35,13 @@ const colors = [{
 
 @action({ UUID: "com.wes.kmtrigger.macro" })
 export class TriggerMacro extends SingletonAction<CounterSettings> {
-    override onWillAppear(ev: WillAppearEvent<CounterSettings>): void | Promise<void> {
+    override async onWillAppear(ev: WillAppearEvent<CounterSettings>): Promise<void> {
+        const macros = await KeyboardMaestroHelper.getMacroList();
         return ev.action.setTitle(`${ev.payload.settings.count ?? 0}`);
     }
 
     override async onKeyDown(ev: KeyDownEvent<CounterSettings>): Promise<void> {
-        console.log("triggering macro...");
+        console.log("triggering macro...", ev);
         // Update the count from the settings.
         const { settings } = ev.payload;
         settings.fuckBy ??= 1;
@@ -77,6 +78,8 @@ export class TriggerMacro extends SingletonAction<CounterSettings> {
         console.log("onSendToPlugin", ev);
         if (ev.payload?.event === 'list-macros') {
             console.log("LIST-MACROS");
+
+            // FYI streamDeck.ui.sendToPropertyInspector in v2.0.0 (ui.current is removed in 2, or deprecated)
             streamDeck.ui.current?.sendToPropertyInspector({
                 event: ev.payload.event,
                 items: colors
