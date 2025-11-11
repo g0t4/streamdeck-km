@@ -15,13 +15,16 @@ import { KeyboardMaestroHelper } from './client';
 type TriggerMacroSettings = {
     macro_uuid?: string;
     parameter?: string;
+    dynamic_title?: string;
 };
 
 @action({ UUID: "com.wes.streamdeck.km.macro" })
 export class TriggerMacro extends SingletonAction<TriggerMacroSettings> {
-    // override async onWillAppear(ev: WillAppearEvent<TrigerMacroSettings>>): Promise<void> {
-    //     return ev.action.setTitle(`${ev.payload.settings.count ?? 0}`);
-    // }
+
+    override async onWillAppear(ev: WillAppearEvent<TriggerMacroSettings>): Promise<void> {
+        // return ev.action.setTitle(`${ev.payload.settings.count ?? 0}`);
+        ev.action.setTitle(ev.payload.settings.dynamic_title ?? '');
+    }
 
     override async onKeyDown(ev: KeyDownEvent<TriggerMacroSettings>): Promise<void> {
         const { settings } = ev.payload;
