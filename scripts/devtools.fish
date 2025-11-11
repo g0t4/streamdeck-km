@@ -7,6 +7,18 @@ set id $(curl -s $list_url | jq -r '.[0].id') # use ID to build own link
 # pre-built URLs too:
 set url $(curl -s $list_url | jq -r '.[0].devtoolsFrontendUrl')
 set url_prefix $(string replace --regex "$id\$" "" "$url") # strip ID from the end so link matches across restarts
+echo "URL: '$url'"
+if test -z "$url"
+    echo "CRAP the URL is missing, most likely the plugin exploded on startup:"
+    echo "    pgrep -ilfa kmtrigger"
+    echo "    npm run logs-sdjson-kmtrigger # will mention failed to start"
+    echo '      OFTEN A DUMB message like: {"func":"std::string esd::plugins::Storage::load(bool, const std::filesystem::path &)","internal_error":"","kpi_message":null,"level":"error","message":"Import error at \'.../Library/Application Support/com.elgato.StreamDeck/Plugins/com.wes.kmtrigger.sdPlugin\'","module":"Plugins","msg_type":"text","skipped":{"duration":0,"skip_counter":0,"unit":"microseconds"},"thread_id":15994015,"timestamp":"2025-11-11T05:36:06.303-06:00","trace_depth":{"depth":0,"type":"none"}}'
+    echo "      i.e. trailing comma in manifest.json and it will not mention that in the logs, it will just say Import error?!"
+    echo "    npm run validate # good starting point if plugin isn't starting"
+    echo "    npm run restart"
+    echo
+    exit
+end
 
 argparse show -- $argv
 # if --show passed, then it will be in _flag_show variable 

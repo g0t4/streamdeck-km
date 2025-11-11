@@ -40,6 +40,5 @@
         "Version": "20",
         "Debug": "--inspect=127.0.0.1:12345"
     },
-    "UUID": "com.wes.kmtrigger",
-
+    "UUID": "com.wes.kmtrigger"
 }
