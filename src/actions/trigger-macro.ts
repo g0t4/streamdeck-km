@@ -27,8 +27,10 @@ export class TriggerMacro extends SingletonAction<TriggerMacroSettings> {
     override async onKeyDown(ev: KeyDownEvent<TriggerMacroSettings>): Promise<void> {
         console.log("triggering macro...", ev);
         const { settings } = ev.payload;
+        // FYI can store state, IIAC across restarts too? 
         // settings.count = (settings.count ?? 0) + settings.increment
 
+        // TODO! settings.trigger_value
         const uuid = settings.macro_uuid;
         console.log('Macro UUID:', uuid);
         await KeyboardMaestroHelper.executeMacro(uuid);
