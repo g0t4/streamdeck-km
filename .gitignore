@@ -217,5 +217,4 @@ node_modules/
 *.log
 
 # Stream Deck Plugin - Allow required assets
-!*.sdPlugin/*.png
-!*.sdPlugin/*.svg
+!*.sdPlugin/icons/*
