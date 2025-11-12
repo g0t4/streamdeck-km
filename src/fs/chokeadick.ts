@@ -68,6 +68,7 @@ export function chokit() {
 
     function handleAskConfig(parsed: AskConfig) {
         config.ask = parsed;
+        // TODO remove this old pathway to manually trigger all buttons to update (when any config changes)... remove this after you're happy with hyperactiv (not causing issues)
         // {"log_threshold_text":"INFO","rag":{"enabled":true},"notify_stats":false,"predictions":{"enabled":true},"verbose_logs":false,"log_threshold":"INFO","fim":{"model":"gptoss"}}
         // streamDeck.actions.forEach(action => {
         //     action.getSettings().then(settings => {
@@ -83,7 +84,6 @@ export function chokit() {
             // TODO
         }
     }
-
 
     // unlike == remove
     // watcher.on("unlink", function (filePath: string, stats?: fs.Stats) {
