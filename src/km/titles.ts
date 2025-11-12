@@ -17,7 +17,21 @@ export function update_title(action: Action, settings: "TriggerMacroSettings") {
     const fn = Function("config", `with(config){ return ${title_path}; }`);
     try {
         const resolved = fn(config);
-        action.setTitle(resolved ?? '');
+        if (resolved === "qwen25coder") {
+            logger.info("SET IMAGE");
+            // FYI if title OR image are set in button designer, then setTitle/setImage doesn't show the title/image!
+            action.setImage("./icons/tmp/qwen.svg");
+            action.setTitle("");
+            // read image base64 into buffer
+            // icons/qwen.svg
+            // action.setImage("icons/out.png");
+        } else {
+            action.setTitle(resolved ?? '');
+            // Generate a simple black SVG and set it as the button image
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72"><rect width="100%" height="100%" fill="black"/></svg>`;
+            const dataUrl = `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
+            action.setImage(dataUrl);
+        }
     } catch (error) {
         logger.error(`💩 Holy crap, something went wrong: ${error}`);
         throw error;
