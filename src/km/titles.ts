@@ -7,7 +7,9 @@ export const config = {
     ask: {
         fim: {
             model: "",
-        }
+        },
+        log_threshold_text: "",
+        reasoning_level: "",
     }
 };
 
@@ -31,7 +33,18 @@ export function update_dynamic_button(action: KeyAction<TriggerMacroSettings>, s
                 action.setTitle("");
                 action.setImage("./icons/openai-light.svg");
             }
-        } else {
+        }
+        else if (type == "reasoning_level") {
+            const level = config?.ask?.reasoning_level;
+            action.setTitle(level);
+            action.setImage(black_dataUrl);
+        }
+        else if (type == "log_threshold") {
+            const threshold = config?.ask?.log_threshold_text;
+            action.setTitle(threshold);
+            action.setImage(black_dataUrl);
+        }
+        else {
             action.setTitle('TODO dynamic type: ' + type);
             action.setImage(black_dataUrl);
         }
