@@ -12,23 +12,22 @@ import {
     DidReceiveSettingsEvent,
 } from "@elgato/streamdeck";
 import { KeyboardMaestroHelper } from './client';
-import { config, update_title } from "./titles";
+import { config, update_dynamic_button } from "./titles";
 
-type TriggerMacroSettings = {
+export type TriggerMacroSettings = {
     macro_uuid?: string;
     parameter?: string;
-    dynamic_title?: string;
+    dynamic_type?: string;
 };
 
 @action({ UUID: "com.wes.streamdeck.km.macro" })
 export class TriggerMacro extends SingletonAction<TriggerMacroSettings> {
     override async onWillAppear(ev: WillAppearEvent<TriggerMacroSettings>): Promise<void> {
-        update_title(ev.action, ev.payload.settings);
+        update_dynamic_button(ev.action, ev.payload.settings);
     }
 
     override async onDidReceiveSettings(ev: DidReceiveSettingsEvent<TriggerMacroSettings>): Promise<void> {
-        // update button title when its settings are changed! (i.e. new dynamic_title)!
-        update_title(ev.action, ev.payload.settings);
+        update_dynamic_button(ev.action, ev.payload.settings);
     }
 
     override async onKeyDown(ev: KeyDownEvent<TriggerMacroSettings>): Promise<void> {

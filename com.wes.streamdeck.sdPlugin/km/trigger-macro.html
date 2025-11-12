@@ -15,22 +15,25 @@
         <sdpi-item label="parameter (%TriggerValue%)"> 
             <sdpi-textfield
                 setting="parameter"
-                placeholder=""
-            ></sdpi-textfield>
-        </sdpi-item>
-        <sdpi-item label="dynamic title"> 
-            <sdpi-textfield
-                setting="dynamic_title"
-                placeholder=""
-            ></sdpi-textfield>
+                placeholder=""></sdpi-textfield>
         </sdpi-item>
         <sdpi-item label="macro">
             <sdpi-select
                 setting="macro_uuid"
                 placeholder="Please choose a macro"
                 show-refresh="true"
-                datasource="list-macros"
-            >
+                datasource="list-macros">
+            </sdpi-select>
+        </sdpi-item>
+        <sdpi-item label="type">
+            <sdpi-select
+                setting="dynamic_type"
+                placeholder="Please choose a dynamic button type">
+                <optgroup label="ask-openai.nvim">
+                    <option value="fim_model_toggle">FIM Model Toggle</option>
+                    <option value="log_threshold">Log Threshold</option>
+                </optgroup>
+                <!-- TODO other button types in their own groups -->
             </sdpi-select>
         </sdpi-item>
     </body>

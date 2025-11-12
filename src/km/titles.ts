@@ -1,37 +1,38 @@
-import { Action } from "@elgato/streamdeck";
+import { KeyAction } from "@elgato/streamdeck";
 import { streamDeck } from "@elgato/streamdeck";
 const logger = streamDeck.logger.createScope("titles");
+import { TriggerMacroSettings } from "./macro";
 
-export const config = {};
+export const config = {
+    ask: {
+        fim: {
+            model: "",
+        }
+    }
+};
 
-export function update_title(action: Action, settings: "TriggerMacroSettings") {
-    // FYI can have titles with:
-    //   ask.fim.model + " foo the bar";
-    const title_path = settings.dynamic_title;
-    if (!title_path) {
+const black_svg = `<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72"><rect width="100%" height="100%" fill="black"/></svg>`;
+const black_dataUrl = `data:image/svg+xml;base64,${Buffer.from(black_svg).toString('base64')}`;
+
+export function update_dynamic_button(action: KeyAction<TriggerMacroSettings>, settings: TriggerMacroSettings) {
+    const type = settings.dynamic_type;
+    if (!type) {
         return;
     }
-    // FYI I can optimize this in the future when I have tons of buttons subscribed to updates
-    //  for example, cache the fn until dynamic_title changes (i.e. global cache)
-    //  scope to what changed (i.e. only things with "\bask\." ) 
-    const fn = Function("config", `with(config){ return ${title_path}; }`);
+
     try {
-        const resolved = fn(config);
-        if (resolved === "qwen25coder") {
-            logger.info("SET IMAGE");
-            // FYI if title OR image are set in button designer, then setTitle/setImage doesn't show the title/image!
-            action.setImage("./icons/qwen.svg");
-            action.setTitle("");
-            // read image base64 into buffer
-            // icons/qwen.svg
-            // action.setImage("icons/out.png");
-        } else if (resolved === "gptoss") {
-            action.setTitle("");
-            action.setImage("./icons/openai-light.svg");
+        if (type == "fim_model_toggle") {
+            const model = config?.ask?.fim?.model;
+            if (model === "qwen25coder") {
+                action.setImage("./icons/qwen.svg");
+                action.setTitle("");
+            }
+            else if (model === "gptoss") {
+                action.setTitle("");
+                action.setImage("./icons/openai-light.svg");
+            }
         } else {
-            action.setTitle(resolved ?? '');
-            const black_svg = `<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72"><rect width="100%" height="100%" fill="black"/></svg>`;
-            const black_dataUrl = `data:image/svg+xml;base64,${Buffer.from(black_svg).toString('base64')}`;
+            action.setTitle('TODO dynamic type: ' + type);
             action.setImage(black_dataUrl);
         }
     } catch (error) {
