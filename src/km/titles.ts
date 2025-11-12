@@ -30,7 +30,7 @@ export function update_dynamic_button(action: KeyAction<TriggerMacroSettings>, s
         hyperactiv.default.dispose(action.hyperactiv_state);
         delete action.hyperactiv_state;
     }
-    const state = hyperactiv.default.computed(() => {
+    action.hyperactiv_state = hyperactiv.default.computed(() => {
         const type = settings.dynamic_type;
         if (!type) {
             return;
@@ -67,5 +67,4 @@ export function update_dynamic_button(action: KeyAction<TriggerMacroSettings>, s
             throw error;
         }
     });
-    action.hyperactiv_state = state;
 }
