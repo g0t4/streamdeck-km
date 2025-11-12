@@ -91,12 +91,11 @@ export class KeyboardMaestroHelper {
             const { stdout, stderr } = await execAsync(`osascript -e '${script}'`);
             if (stderr) {
                 streamDeck.logger.error('Error executing macro:', stderr);
-                throw new Error(stderr);
+                return
             }
 
         } catch (error: any) {
             streamDeck.logger.error('Failed to execute macro:', error.message);
-            throw error;
         }
     }
 }
