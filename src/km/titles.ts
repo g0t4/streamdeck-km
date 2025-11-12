@@ -58,13 +58,16 @@ export function update_dynamic_button(action: KeyAction<TriggerMacroSettings>, s
                 action.setTitle(threshold);
                 action.setImage(black_dataUrl);
             }
+            else if (type == "none") {
+                action.setTitle("none");
+                action.setImage(black_dataUrl);
+            }
             else {
                 action.setTitle('TODO dynamic type: ' + type);
                 action.setImage(black_dataUrl);
             }
         } catch (error) {
             logger.error(`💩 Holy crap, something went wrong: ${error}`);
-            throw error;
         }
     });
 }
