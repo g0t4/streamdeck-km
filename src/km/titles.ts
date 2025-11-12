@@ -11,6 +11,9 @@ export function update_title(action: Action, settings: "TriggerMacroSettings") {
     if (!title_path) {
         return;
     }
+    // FYI I can optimize this in the future when I have tons of buttons subscribed to updates
+    //  for example, cache the fn until dynamic_title changes (i.e. global cache)
+    //  scope to what changed (i.e. only things with "\bask\." ) 
     const fn = Function("config", `with(config){ return ${title_path}; }`);
     try {
         const resolved = fn(config);
